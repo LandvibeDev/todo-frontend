@@ -1,0 +1,13 @@
+.task {
+    display: inline;
+    text-align: center;
+    font-size: 1.5rem;
+    background-color: #61dafb;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+}
+
+.task-btn {
+    float: right;
+}

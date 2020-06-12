@@ -1,13 +1,14 @@
 import React from 'react';
-import Board from './component/Board';
-import './css/Board.css';
+import {
+    BrowserRouter,
+    Route
+} from "react-router-dom";
+import Board from './page/Board';
 function App() {
     return (
-        <div>
-            <Board className='first'/>
-            <Board className='second'/>
-            <Board className='third'/>
-        </div>
+        <BrowserRouter>
+            <Route exact path="/" component={Board}/>
+        </BrowserRouter>
     );
 }
 
