@@ -1,14 +1,23 @@
-async function moveTo(id) {
+async function moveTo(id, status) {
     try {
-        return Promise.resolve({
-            id, status: 'DONE'
-        })
+        const response = await fetch(`/todo/cards/${id}`, {
+            method: 'PUT',
+            credentials: 'include',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify({status})
+        });
+
+        if (response.ok) {
+            return response.json();
+        }
+
+        return null;
     } catch (e) {
-
-        return false;
-
+        return null;
     }
-
 }
 
 export default moveTo;

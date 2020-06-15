@@ -1,43 +1,27 @@
 async function getCards() {
-    const cards = {
-        'cards': [
-            {
-                'id': 1,
-                'title': 'study react',
-                'status': 'TODO'
-            },
-            {
-                'id': 2,
-                'title': 'study spring2',
-                'status': 'DONE'
-            },
-            {
-                'id': 3,
-                'title': 'study 메론',
-                'status': 'TODO'
-            },
-            {
-                'id': 4,
-                'title': 'study 김치',
-                'status': 'TODO'
-            },
-            {
-                'id': 5,
-                'title': 'study 오징어',
-                'status': 'TODO'
-            },
-            {
-                'id': 6,
-                'title': 'study 코끼리',
-                'status': 'TODO'
+    try {
+        const response = await fetch('/todo/cards', {
+            method: 'GET',
+            credentials: 'include',
+            mode: 'cors',
+            headers: {
+                'Accept': 'application/json; utf-8'
             }
-        ]
-    };
-    const todo = cards['cards'].filter(card => card['status'] === 'TODO');
-    const done = cards['cards'].filter(card => card['status'] === 'DONE');
-    return {
-        todo, done
+        });
+
+        const cards = await response.json();
+        const todo = cards.filter(card => card['status'] === 'TODO');
+        const done = cards.filter(card => card['status'] === 'DONE');
+        return {
+            todo, done
+        }
+    } catch (e) {
+        return {
+            todo: [],
+            done: []
+        };
     }
+
 }
 
 export default getCards;

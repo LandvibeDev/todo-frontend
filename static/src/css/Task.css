@@ -8,6 +8,10 @@
     padding: 1.5rem;
 }
 
-.task-btn {
+.task-left-btn {
     float: right;
+}
+
+.task-right-btn {
+    float: left;
 }

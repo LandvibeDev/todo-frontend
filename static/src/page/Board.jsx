@@ -4,6 +4,7 @@ import getCards from "../service/getCards";
 import '../css/Board.css';
 import moveTo from "../service/moveTo";
 import {Link} from "react-router-dom";
+import {toName, toToggleName} from '../utility/status';
 
 function Board() {
     const [cards, updateCards] = useState({});
@@ -14,13 +15,16 @@ function Board() {
         })();
     }, []);
 
-    const move = async (id) => {
-        const result = await moveTo(id);
-        if (!!result && id === result.id && result.status === 'DONE') {
-            const index = cards.todo.findIndex(task => task.id === id);
-            const [task] = cards.todo.splice(index, 1);
-            task.status = result.status;
-            cards.done.push(task);
+    const move = async (id, targetStatus) => {
+        const result = await moveTo(id, targetStatus);
+        if (!!result) {
+            const originStatus = toToggleName(targetStatus);
+            const index = cards[originStatus].findIndex(task => task.id === id);
+            const [task] = cards[originStatus].splice(index, 1);
+
+            const changedStatus = toName(result.status);
+            cards[changedStatus].push(task);
+
             updateCards({
                 todo: [...cards.todo],
                 done: [...cards.done]
