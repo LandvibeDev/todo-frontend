@@ -25,4 +25,4 @@ function Task(props) {
     );
 }
 
-export default Task;
+export default React.memo(Task, (prev, next) => prev.subject === next.subject);
