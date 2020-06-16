@@ -1,28 +1,17 @@
-const toToggledValue = (current) => {
-    return current === 'todo' ? 'DONE' : 'TODO';
-};
+const toToggledValue = (current) => (current === 'todo' ? 'DONE' : 'TODO');
 
-const toToggleName = (current) => {
-    return current === 'TODO' ? 'done' : 'todo';
-};
+const toToggleName = (current) => (current === 'TODO' ? 'done' : 'todo');
 
-const toName = (status) => {
-    return status === 'TODO' ? 'todo' : 'done';
-};
+const toName = (status) => (status === 'TODO' ? 'todo' : 'done');
 
-const isDone = (status) => {
-    return status === 'done';
-};
+const isDone = (status) => status === 'done';
 
-const isTodo = (status) => {
-    return !isDone(status);
-};
+const isTodo = (status) => !isDone(status);
 
 export {
-    toToggledValue,
-    toToggleName,
-    toName,
-    isDone,
-    isTodo
-}
-
+  toToggledValue,
+  toToggleName,
+  toName,
+  isDone,
+  isTodo,
+};

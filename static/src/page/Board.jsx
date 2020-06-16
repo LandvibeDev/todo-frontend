@@ -26,8 +26,8 @@ function Board() {
             cards[changedStatus].push(task);
 
             updateCards({
-                todo: [...cards.todo],
-                done: [...cards.done]
+                todo: cards.todo,
+                done: cards.done
             });
         }
     };
