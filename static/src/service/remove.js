@@ -6,7 +6,7 @@ async function remove(id) {
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
-      }
+      },
     });
 
     return response.status === 204;

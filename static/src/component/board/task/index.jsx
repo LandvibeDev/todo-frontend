@@ -7,7 +7,7 @@ import { toText } from '../../../utility/priority';
 
 function Task(props) {
   const {
-    title, assignee, priority, created, subject, id, move, remove
+    title, assignee, priority, created, subject, id, move, remove,
   } = props;
 
   const onClick = (event) => {
@@ -16,23 +16,21 @@ function Task(props) {
     move(id, priority, toggledValue);
   };
 
-    const onRemovalClick = (event) => {
-        event.stopPropagation();
-        const toggledValue = toToggledValue(subject);
-        remove(id, toggledValue);
-    };
+  const onRemovalClick = (event) => {
+    event.stopPropagation();
+    const toggledValue = toToggledValue(subject);
+    remove(id, toggledValue);
+  };
 
   return (
     <div className="task">
-        <Button className="task-removal-btn" onClick={onRemovalClick} value="X" />
+      <Button className="task-removal-btn" onClick={onRemovalClick} value="X" />
       {
                 isTodo(subject) && <Button className="task-left-btn" onClick={onClick} value=">" />
             }
       {
                 isDone(subject) && <Button className="task-right-btn" onClick={onClick} value="<" />
             }
-
-
       <div>
         {title}
         {' '}
@@ -43,7 +41,6 @@ function Task(props) {
         {' '}
         {created}
       </div>
-
     </div>
   );
 }

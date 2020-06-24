@@ -51,7 +51,15 @@ function Board() {
     <div className="board">
       <div className="board-list">
         {
-                    Object.entries(cards).map(([subject, tasks]) => <Card key={subject} subject={subject} tasks={tasks} move={move} remove={tryRemove}/>)
+                    Object.entries(cards).map(([subject, tasks]) => (
+                      <Card
+                        key={subject}
+                        subject={subject}
+                        tasks={tasks}
+                        move={move}
+                        remove={tryRemove}
+                      />
+                    ))
                 }
       </div>
 
