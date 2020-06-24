@@ -15,3 +15,8 @@
 .task-right-btn {
     float: left;
 }
+
+.task-removal-btn {
+    float: right;
+    margin-left: 0.7rem;
+}
