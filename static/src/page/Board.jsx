@@ -20,10 +20,10 @@ function Board() {
         if (!!result) {
             const originStatus = toToggleName(targetStatus);
             const index = cards[originStatus].findIndex(task => task.id === id);
-            const [task] = cards[originStatus].splice(index, 1);
+            cards[originStatus].splice(index, 1);
 
             const changedStatus = toName(result.status);
-            cards[changedStatus].push(task);
+            cards[changedStatus].push(result);
 
             updateCards({
                 todo: cards.todo,
