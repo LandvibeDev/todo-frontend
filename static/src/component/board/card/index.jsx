@@ -9,7 +9,7 @@ function Card(props) {
             <div className='title'>{subject}</div>
             {
                 tasks.map(task => {
-                    return <Task key={task.id} title={task.title} manager={task.assignee} subject={subject} id={task.id} move={move}/>
+                    return <Task key={task.id} title={task.title} assignee={task.assignee} priority={task.priority} subject={subject} id={task.id} move={move}/>
                 })
             }
 

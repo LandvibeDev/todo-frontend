@@ -31,4 +31,12 @@ label {
     display: inline-block;
 }
 
+.enrollment-select {
+    border: 2px solid #394a6d;
+    background: #fff;
+    margin: 10px;
+    padding: 10px;
+    font-size: 15px;
+    width: 50%;
+}
 

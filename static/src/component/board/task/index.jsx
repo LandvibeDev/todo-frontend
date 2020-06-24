@@ -3,9 +3,10 @@ import '../../../css/Task.css';
 
 import {isDone, isTodo, toToggledValue} from "../../../utility/status";
 import Button from "../../atom/Button";
+import {PRIORITY} from "../../../utility/priority";
 
 function Task(props) {
-    const {title, assignee, subject, id, move} = props;
+    const {title, assignee, priority, subject, id, move} = props;
     const onClick = (event) => {
         event.stopPropagation();
         const toggledValue = toToggledValue(subject);
@@ -17,7 +18,7 @@ function Task(props) {
             {
                 isTodo(subject) && <Button className='task-left-btn' onClick={onClick} value='>'/>
             }
-            {title} {assignee}
+            {title} {assignee} {PRIORITY.toText(priority)}
             {
                 isDone(subject) && <Button className='task-right-btn' onClick={onClick} value='<'/>
             }
