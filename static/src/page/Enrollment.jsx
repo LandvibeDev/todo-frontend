@@ -6,11 +6,18 @@ import Input from "../component/atom/Input";
 
 function Enrollment({history}) {
     const [title, setTitle] = useState('');
+    // 다시
+    const [assignee, setAssignee] = useState('');
 
     const onChange = (event) => {
         event.stopPropagation();
         setTitle(event.target.value);
     };
+
+    //handle
+    function handle(event){
+        setAssignee(event.target.value);
+    }
 
     const onPreviousClick = (event) => {
         event.stopPropagation();
@@ -48,6 +55,8 @@ function Enrollment({history}) {
             <div className='enrollment-title'>
                 <label htmlFor="title">Title</label>
                 <Input id='title' onChange={onChange} onKeyPress={onEnterPress} value={title}/>
+               // 다시
+                <Input id='assignee' onChange={handle} value={Assignee}/>
             </div>
             <div className='enrollment-btn-grp'>
                 <Button className='enrollment-btn' onClick={onPreviousClick} value='이전'/>
