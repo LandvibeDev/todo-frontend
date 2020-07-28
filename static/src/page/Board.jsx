@@ -31,13 +31,36 @@ function Board() {
             });
         }
     };
+    function remove(id) {
+        const todo = cards.todo;
+        const done = cards.done;
+
+        let index = todo.findIndex((value) => {
+            return value.id === id;
+        });
+
+        if(index!==-1){
+            todo.splice(index, 1);
+        }
+        else{
+            index = done.findIndex((value) => {
+                return value.id === id;
+            });
+            done.splice(index, 1);
+        }
+
+        updateCards({
+            "todo": cards.todo,
+            "done": cards.done
+        });
+    }
 
     return (
         <div className='board'>
             <div className='board-list'>
                 {
                     Object.entries(cards).map(([subject, tasks]) => {
-                        return <Card key={subject} subject={subject} tasks={tasks} move={move}/>;
+                        return <Card key={subject} subject={subject} tasks={tasks} move={move} remove={remove}/>;
                     })
                 }
             </div>

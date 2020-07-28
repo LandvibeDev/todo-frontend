@@ -5,12 +5,15 @@ import {isDone, isTodo, toToggledValue} from "../../../utility/status";
 import Button from "../../atom/Button";
 
 function Task(props) {
-    const {title, subject, id, created, move} = props;
+    const {title, subject, id, created, move, remove} = props;
     const onClick = (event) => {
         event.stopPropagation();
         const toggledValue = toToggledValue(subject);
         move(id, toggledValue);
     };
+    function handle(event) {
+        remove(id);
+    }
 
     return (
         <div className='task'>
@@ -22,6 +25,7 @@ function Task(props) {
             {
                 isDone(subject) && <Button className='task-right-btn' onClick={onClick} value='<'/>
             }
+            <Button className='task-remove-btn' onClick={handle} value='X'/>
         </div>
     );
 }
