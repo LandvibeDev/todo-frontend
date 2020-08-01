@@ -5,6 +5,7 @@ import '../css/Board.css';
 import moveTo from "../service/moveTo";
 import {Link} from "react-router-dom";
 import {toName, toToggleName} from '../utility/status';
+import deleteCard from "../service/deleteCard";
 
 function Board() {
     const [cards, updateCards] = useState({});
@@ -38,15 +39,22 @@ function Board() {
         let index = todo.findIndex((value) => {
             return value.id === id;
         });
-
-        if(index!==-1){
+        if(index!==-1) {
             todo.splice(index, 1);
+            const isSuccesses = deleteCard(id);
+            if (!isSuccesses) {
+                alert('NotFound(todo)');
+            }
         }
         else{
             index = done.findIndex((value) => {
                 return value.id === id;
             });
             done.splice(index, 1);
+            const isSuccesses = deleteCard(id);
+            if (!isSuccesses) {
+                alert('NotFound(done)');
+            }
         }
 
         updateCards({
