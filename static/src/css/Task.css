@@ -7,6 +7,10 @@
     margin-bottom: 1rem;
     padding: 1.5rem;
 }
+.task-remove-btn{
+    float:right;
+    margin : 0px 10px
+}
 
 .task-left-btn {
     float: right;

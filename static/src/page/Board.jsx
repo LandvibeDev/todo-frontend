@@ -5,6 +5,7 @@ import '../css/Board.css';
 import moveTo from '../service/moveTo';
 import {Link} from 'react-router-dom';
 import {toName, toToggleName} from '../utility/status';
+import removeCard from "../service/removeCard";
 
 function Board() {
     const [cards, updateCards] = useState({});
@@ -33,39 +34,46 @@ function Board() {
     };
 
     function remove(id) {
-        console.log(id);
-        const todo = cards.todo;
-        const done = cards.done;
-        console.log(todo);
-        console.log(done);
+        // const isSuccesses = await removeCard(id);
+        const isSuccesses = removeCard(id);
+        if (isSuccesses) {
+            //history.goBack();
+            console.log(id);
+            const todo = cards.todo;
+            const done = cards.done;
+            console.log(todo);
+            console.log(done);
 
-        let index = todo.findIndex((value) => {  //index 알아내기
-            return value.id === id;
-        })
-
-        if (index !== -1) {     //todod에서 찾았을 경우
-            todo.splice(index,1);   //(삭제 시작할 index, 삭제할 개수)
-        }else{  //todo에서 못찾았을 경우 done에서 찾는다.
-            index = done.findIndex((value) => {  //index 알아내기
+            let index = todo.findIndex((value) => {  //index 알아내기
                 return value.id === id;
+            })
+
+            if (index !== -1) {     //todod에서 찾았을 경우
+                todo.splice(index,1);   //(삭제 시작할 index, 삭제할 개수)
+            }else{  //todo에서 못찾았을 경우 done에서 찾는다.
+                index = done.findIndex((value) => {  //index 알아내기
+                    return value.id === id;
+                });
+                done.splice(index,1);
+            }
+
+            console.log(todo);
+            console.log(done);
+
+            //변경된 상태를 react에게 알려주어야한다. 아래 코드 안쓰면 x눌러도 화면에서 안사라짐.
+            updateCards({
+                "todo" : todo,
+                "done":done
+                //todo, done
+                //이렇게 한줄로만 써도 된다. 똑같은것이다.
             });
-            done.splice(index,1);
+
+            //updateCards 호출
+            // react 해당 데이터가 변경이 됐구나!
+            // react 해당 데이터를 사용하는 모든 컴포넌트를 부라우저에서 다시 그려준다.
+        } else {
+            alert('카드 삭제에 실패했습니다.');
         }
-
-        console.log(todo);
-        console.log(done);
-
-        //변경된 상태를 react에게 알려주어야한다. 아래 코드 안쓰면 x눌러도 화면에서 안사라짐.
-        updateCards({
-            "todo" : todo,
-            "done":done
-            //todo, done
-            //이렇게 한줄로만 써도 된다. 똑같은것이다.
-        });
-
-        //updateCards 호출
-        // react 해당 데이터가 변경이 됐구나!
-        // react 해당 데이터를 사용하는 모든 컴포넌트를 부라우저에서 다시 그려준다.
     }
 
     return (

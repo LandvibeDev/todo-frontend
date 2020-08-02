@@ -20,19 +20,19 @@ function Task(props) {
 
     return (
         <div className='task'>
-            {
-                isTodo(subject)
-                && <Button className='task-left-btn' onClick={onClick} value='>'/>
-
-            }
             {title}<br/>
             {created}
             {
                 isDone(subject)
                 && <Button className='task-right-btn' onClick={onClick} value='<'/>
+            }
+            {<Button className='task-remove-btn' onClick={handle} value='X'/>}
+            {
+                isTodo(subject)
+                && <Button className='task-left-btn' onClick={onClick} value='>'/>
 
             }
-            <Button className='task-right-btn' onClick={handle} value='X'/>
+
         </div>
     );
 }
