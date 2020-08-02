@@ -6,12 +6,17 @@ import Input from "../component/atom/Input";
 
 function Enrollment({history}) {
     const [title, setTitle] = useState('');
+    const [assignee,setAssignee]=useState('');
 
     const onChange = (event) => {
         event.stopPropagation();
         setTitle(event.target.value);
     };
 
+    const onChangeAssignee = (event) => {
+        event.stopPropagation();
+        setAssignee(event.target.value);
+    };
 
     const onPreviousClick = (event) => {
         event.stopPropagation();
@@ -19,7 +24,7 @@ function Enrollment({history}) {
     };
 
     const add = async () => {
-        const isSuccesses = await createCard(title);
+        const isSuccesses = await createCard(title,assignee);
         if (isSuccesses) {
             history.goBack();
         } else {
@@ -42,6 +47,7 @@ function Enrollment({history}) {
     const onClearClick = (event) => {
         event.stopPropagation();
         setTitle('');
+        setAssignee('');
     };
 
     return (
@@ -49,6 +55,10 @@ function Enrollment({history}) {
             <div className='enrollment-title'>
                 <label htmlFor="title">Title</label>
                 <Input id='title' onChange={onChange} onKeyPress={onEnterPress} value={title}/>
+                <br/>
+                <label htmlFor="title">Assignee</label>
+                <Input id='assignee' onChange={onChangeAssignee} value={assignee}/>
+
             </div>
             <div className='enrollment-btn-grp'>
                 <Button className='enrollment-btn' onClick={onPreviousClick} value='이전'/>

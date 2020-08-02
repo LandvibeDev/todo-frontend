@@ -1,4 +1,4 @@
-async function createCard(title) {
+async function createCard(title, assignee) {
   try {
     const response = await fetch('/todo/cards', {
       method: 'POST',
@@ -7,7 +7,7 @@ async function createCard(title) {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
-      body: JSON.stringify({ title }),
+      body: JSON.stringify({ title, assignee }),
     });
 
     return response.status === 201;

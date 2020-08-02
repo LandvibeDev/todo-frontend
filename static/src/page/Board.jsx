@@ -34,7 +34,6 @@ function Board() {
     };
 
     function remove(id) {
-        // const isSuccesses = await removeCard(id);
         const isSuccesses = removeCard(id);
         if (isSuccesses) {
             //history.goBack();
