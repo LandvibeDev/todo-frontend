@@ -26,6 +26,21 @@ function Board() {
             const changedStatus = toName(result.status);
             cards[changedStatus].push(result);
 
+            // case 1:
+            // const changedCards = await getCards();
+            // updateCards({
+            //     todo: changedCards.todo,
+            //     done: changedCards.done
+            // });
+
+            // case 2:
+            cards.todo.sort(function (a, b) {
+                return a.priority-b.priority;
+            });
+            cards.done.sort(function (a, b) {
+                return a.priority-b.priority;
+            });
+
             updateCards({
                 todo: cards.todo,
                 done: cards.done

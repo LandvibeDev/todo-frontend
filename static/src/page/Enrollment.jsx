@@ -7,15 +7,21 @@ import Input from "../component/atom/Input";
 function Enrollment({history}) {
     const [title, setTitle] = useState('');
     const [assignee, setAssignee] = useState('');
+    const [priority, setPriority] = useState('2');
 
-    const onChange = (event) => {
+    const onChangeTitle = (event) => {
         event.stopPropagation();
         setTitle(event.target.value);
     };
 
-    const handleAssigneeInput=(event)=>{
+    const onChangeAssignee = (event) => {
         event.stopPropagation();
         setAssignee(event.target.value);
+    }
+
+    const onChangePriority = (event) => {
+        event.stopPropagation();
+        setPriority(event.target.value);
     }
 
     const onPreviousClick = (event) => {
@@ -24,7 +30,7 @@ function Enrollment({history}) {
     };
 
     const add = async () => {
-        const isSuccesses = await createCard(title, assignee);
+        const isSuccesses = await createCard(title, assignee, priority);
         if (isSuccesses) {
             history.goBack();
         } else {
@@ -48,15 +54,25 @@ function Enrollment({history}) {
         event.stopPropagation();
         setTitle('');
         setAssignee('');
+        document.getElementById("priority").value = 2;
+        setPriority('2');
     };
 
     return (
         <div className='enrollment'>
             <div className='enrollment-title'>
                 <label htmlFor="title">Title</label>
-                <Input id='title' onChange={onChange} onKeyPress={onEnterPress} value={title}/> <br/>
+                <Input id='title' onChange={onChangeTitle} onKeyPress={onEnterPress} value={title}/> <br/>
                 <label htmlFor="assignee">담당자</label>
-                <Input id='assignee' onChange={handleAssigneeInput} onKeyPress={onEnterPress} value={assignee}/>
+                <Input id='assignee' onChange={onChangeAssignee} onKeyPress={onEnterPress} value={assignee}/> <br/>
+                <label>
+                    우선순위
+                    <select id='priority' onChange={onChangePriority}>
+                        <option value="1">1순위</option>
+                        <option selected value="2">2순위</option>
+                        <option value="3">3순위</option>
+                    </select>
+                </label>
             </div>
             <div className='enrollment-btn-grp'>
                 <Button className='enrollment-btn' onClick={onPreviousClick} value='이전'/>
