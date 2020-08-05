@@ -6,7 +6,8 @@ import Input from "../component/atom/Input";
 
 function Enrollment({history}) {
     const [title, setTitle] = useState('');
-    const [assignee,setAssignee]=useState('');
+    const [assignee, setAssignee] = useState('');
+    const [priority, setPriority]=useState(2);
 
     const onChange = (event) => {
         event.stopPropagation();
@@ -18,13 +19,22 @@ function Enrollment({history}) {
         setAssignee(event.target.value);
     };
 
+    const onChangePriority = (event) => {
+        event.stopPropagation();
+        setPriority(event.target.value);
+    };
+
+    function onDisplayPriority(){
+        document.getElementById("priority").selectedIndex="1";
+    }
+
     const onPreviousClick = (event) => {
         event.stopPropagation();
         history.goBack();
     };
 
     const add = async () => {
-        const isSuccesses = await createCard(title,assignee);
+        const isSuccesses = await createCard(title, assignee, priority);
         if (isSuccesses) {
             history.goBack();
         } else {
@@ -48,7 +58,11 @@ function Enrollment({history}) {
         event.stopPropagation();
         setTitle('');
         setAssignee('');
+        setPriority(2);
+        onDisplayPriority();
+
     };
+
 
     return (
         <div className='enrollment'>
@@ -58,6 +72,13 @@ function Enrollment({history}) {
                 <br/>
                 <label htmlFor="title">Assignee</label>
                 <Input id='assignee' onChange={onChangeAssignee} value={assignee}/>
+                <br/>
+                <label htmlFor="title">Priority</label>
+                <select name="priority" id="priority" onChange={onChangePriority}>
+                    <option value="1">1순위</option>
+                    <option value="2" selected="selected">2순위</option>
+                    <option value="3">3순위</option>
+                </select>
 
             </div>
             <div className='enrollment-btn-grp'>

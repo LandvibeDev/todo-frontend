@@ -27,8 +27,12 @@ function Board() {
             cards[changedStatus].push(result);
 
             updateCards({
-                todo: cards.todo,
-                done: cards.done,
+                todo: cards.todo.sort(function(a,b){
+                    return a.priority<b.priority?-1:a.priority>b.priority?1:0;
+                }),
+                done: cards.done.sort(function(a,b){
+                    return a.priority<b.priority?-1:a.priority>b.priority?1:0;
+                }),
             });
         }
     };
@@ -36,7 +40,6 @@ function Board() {
     function remove(id) {
         const isSuccesses = removeCard(id);
         if (isSuccesses) {
-            //history.goBack();
             console.log(id);
             const todo = cards.todo;
             const done = cards.done;
@@ -79,7 +82,8 @@ function Board() {
         <div className="board">
             <div className="board-list">
                 {
-                    Object.entries(cards).map(([subject, tasks]) => // Object.entries(cards) : ㅏkey에 done, value에 해당값들. 즉 [todo,[{},{}]]로 만들어준다.
+                    Object.entries(cards).map(([subject, tasks]) =>
+                            // Object.entries(cards) : ㅏkey에 done, value에 해당값들. 즉 [todo,[{},{}]]로 만들어준다.
                             <Card remove={remove} key={subject} subject={subject} tasks={tasks} move={move}/>, // map(function) : function를 적용시켜서 변환
                         //remove={remove} : 자식한테 props로 전달해준다.
                     )

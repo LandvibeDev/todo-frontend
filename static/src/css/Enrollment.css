@@ -31,4 +31,8 @@ label {
     display: inline-block;
 }
 
+select {
+    padding: 12px 12px 12px 0;
+    width:950px;
+}
 
