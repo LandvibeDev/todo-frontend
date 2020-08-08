@@ -5,6 +5,7 @@ import '../css/Board.css';
 import moveTo from "../service/moveTo";
 import {Link} from "react-router-dom";
 import {toName, toToggleName} from '../utility/status';
+import deleteCard from "../service/deleteCard";
 
 function Board() {
     const [cards, updateCards] = useState({});
@@ -25,19 +26,64 @@ function Board() {
             const changedStatus = toName(result.status);
             cards[changedStatus].push(result);
 
+            // case 1:
+            // const changedCards = await getCards();
+            // updateCards({
+            //     todo: changedCards.todo,
+            //     done: changedCards.done
+            // });
+
+            // case 2:
+            cards.todo.sort(function (a, b) {
+                return a.priority-b.priority;
+            });
+            cards.done.sort(function (a, b) {
+                return a.priority-b.priority;
+            });
+
             updateCards({
                 todo: cards.todo,
                 done: cards.done
             });
         }
     };
+    function remove(id) {
+        const todo = cards.todo;
+        const done = cards.done;
+
+        let index = todo.findIndex((value) => {
+            return value.id === id;
+        });
+        if(index!==-1) {
+            todo.splice(index, 1);
+            const isSuccesses = deleteCard(id);
+            if (!isSuccesses) {
+                alert('NotFound(todo)');
+            }
+        }
+        else{
+            index = done.findIndex((value) => {
+                return value.id === id;
+            });
+            done.splice(index, 1);
+            const isSuccesses = deleteCard(id);
+            if (!isSuccesses) {
+                alert('NotFound(done)');
+            }
+        }
+
+        updateCards({
+            "todo": cards.todo,
+            "done": cards.done
+        });
+    }
 
     return (
         <div className='board'>
             <div className='board-list'>
                 {
                     Object.entries(cards).map(([subject, tasks]) => {
-                        return <Card key={subject} subject={subject} tasks={tasks} move={move}/>;
+                        return <Card key={subject} subject={subject} tasks={tasks} move={move} remove={remove}/>;
                     })
                 }
             </div>
